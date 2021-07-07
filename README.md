@@ -1,144 +1,51 @@
-# SimSwap: An Efficient Framework For High Fidelity Face Swapping
-## Proceedings of the 28th ACM International Conference on Multimedia
-**The official repository with Pytorch**
+# Flask App Template
 
-*Our method can realize **arbitrary face swapping** on images and videos with **one single trained model**.*
+Boilerplate code for a flask app to wrap around a Machine Learning Model.
 
-Currently, only the test code is available. Training scripts are coming soon
+## Simple How to Use
 
-[![simswaplogo](/docs/img/logo1.png)](https://github.com/neuralchen/SimSwap)
+* Clone this repo
+* Update repository remote:
 
-Our paper can be downloaded from [[Arxiv]](https://arxiv.org/pdf/2106.06340v1.pdf) [[ACM DOI]](https://dl.acm.org/doi/10.1145/3394171.3413630) 
-
-<!-- [[Google Drive]](https://drive.google.com/file/d/1fcfWOGt1mkBo7F0gXVKitf8GJMAXQxZD/view?usp=sharing) 
-[[Baidu Drive ]](https://pan.baidu.com/s/1-TKFuycRNUKut8hn4IimvA) Password: ```ummt``` -->
-
-## Attention
-***This project is for technical and academic use only. Please do not apply it to illegal and unethical scenarios.***
-
-## Top News <img width=8% src="./docs/img/new.gif"/>
-**`2021-07-04`**: A new Colab performing **multi specific** face video swapping has been added. You can check it out [here](https://colab.research.google.com/github/neuralchen/SimSwap/blob/main/MultiSpecific.ipynb) 
-
-**`2021-07-03`**: We add the scripts for **multi specific** face swapping, please go to [Inference for image or video face swapping](./docs/guidance/usage.md) for details. 
-
-**`2021-07-02`**: We add the scripts for designating a **specific** person in arbitrary video or image to change face, please go to [Inference for image or video face swapping](./docs/guidance/usage.md) for details.
-
-**`2021-07-02`**: We have added a hyper parameter to allow users to choose whether to add the simswap logo as a watermark, please go to the section "About watermark of simswap logo" of [Inference for image or video face swapping](./docs/guidance/usage.md) for details.
-
-**`2021-06-20`**: We release the scripts for arbitrary video and image processing, and a colab demo.
-
-## Dependencies
-- python3.6+
-- pytorch1.5+
-- torchvision
-- opencv
-- pillow
-- numpy
-- imageio
-- moviepy
-- insightface
-
-## Usage
-[Preparation](./docs/guidance/preparation.md)
-
-[Inference for image or video face swapping](./docs/guidance/usage.md)
-
-[Colab demo](https://colab.research.google.com/github/neuralchen/SimSwap/blob/main/SimSwap%20colab.ipynb)
-
-Training: **coming soon**
-
-
-## Video
-<img src="./docs/img/video.webp"/>
-<div>
-<img width=24% src="./docs/img/anni.webp"/>
-<img width=24% src="./docs/img/chenglong.webp"/>
-<img width=24% src="./docs/img/zhoujielun.webp"/>
-<img width=24% src="./docs/img/zhuyin.webp"/>
-</div>
-
-## Results
-![Results1](/docs/img/results1.PNG)
-
-![Results2](/docs/img/total.PNG)
-
-
-<!-- ![video2](/docs/img/anni.webp)
-![video3](/docs/img/chenglong.webp)
-![video4](/docs/img/zhoujielun.webp)
-![video5](/docs/img/zhuyin.webp) -->
-
-
-**High-quality videos can be found in the link below:**
-
-[[Mama(video) 1080p]](https://drive.google.com/file/d/1JTruy6BTnT1EK1PSaZ4x-F8RhtZU_kT3/view?usp=sharing)
-
-[[Google Drive link for video 1]](https://drive.google.com/file/d/1hdne7Gw39d34zt3w1NYV3Ln5cT8PfCNm/view?usp=sharing)
-
-[[Google Drive link for video 2]](https://drive.google.com/file/d/1bDEg_pVeFYLnf9QLSMuG8bsjbRPk0X5_/view?usp=sharing)
-
-[[Google Drive link for video 3]](https://drive.google.com/file/d/1oftHAnLmgFis4XURcHTccGSWbWSXYKK1/view?usp=sharing)
-
-[[Baidu Drive link for video]](https://pan.baidu.com/s/1WTS6jm2TY17bYJurw57LUg ) Password: ```b26n```
-
-[[Online Video]](https://www.bilibili.com/video/BV12v411p7j5/)
-
-## User case
-If you have some interesting results after using our project and are willing to share, you can contact us by email or share directly on the issue. Later, we may make a separate section to show these results, which should be cool.
-
-At the same time, if you have suggestions for our project, please feel free to ask questions in the issue, or contact us directly via email: [email1](mailto:chenxuanhongzju@outlook.com), [email2](mailto:nicklau26@foxmail.com), [email3](mailto:ziangliu824@gmail.com). (All three can be contacted, just choose any one)
-
-## License
-For academic and non-commercial use only.The whole project is under the CC-BY-NC 4.0 license. See [LICENSE](https://github.com/neuralchen/SimSwap/blob/main/LICENSE) for additional details.
-
-
-## To cite our paper
-```
-@inproceedings{DBLP:conf/mm/ChenCNG20,
-  author    = {Renwang Chen and
-               Xuanhong Chen and
-               Bingbing Ni and
-               Yanhao Ge},
-  title     = {SimSwap: An Efficient Framework For High Fidelity Face Swapping},
-  booktitle = {{MM} '20: The 28th {ACM} International Conference on Multimedia},
-  pages     = {2003--2011},
-  publisher = {{ACM}},
-  year      = {2020},
-  url       = {https://doi.org/10.1145/3394171.3413630},
-  doi       = {10.1145/3394171.3413630},
-  timestamp = {Thu, 15 Oct 2020 16:32:08 +0200},
-  biburl    = {https://dblp.org/rec/conf/mm/ChenCNG20.bib},
-  bibsource = {dblp computer science bibliography, https://dblp.org}
-}
+```bash
+$ git remote set-url origin <newurl>
 ```
 
-## Related Projects
+* Create your own model by extending from `BaseModel` in [declarations.py](flask_app/model/declarations.py)
+* update `init_model_store` function in [`model` package](flask_app/model/__init__.py)
+* update endpoints in [views.py](flask_app/views.py)
 
-**Please visit our another ACMMM2020 high-quality style transfer project**
+## Create Environment using Conda
 
-[![logo](./docs/img/logo.png)](https://github.com/neuralchen/ASMAGAN)
+```bash
+$ # create conda environment
+$ conda env create --file environments/environment.yml
+$ conda activate <conda_env>
+```
 
-[![title](/docs/img/title.png)](https://github.com/neuralchen/ASMAGAN)
+## Serve Flask App
 
-Learn about our other projects 
-[[RainNet]](https://neuralchen.github.io/RainNet);
+### Using Flask Built-in Development Server
 
-[[Sketch Generation]](https://github.com/TZYSJTU/Sketch-Generation-with-Drawing-Process-Guided-by-Vector-Flow-and-Grayscale);
+```bash
+$ export FLASK_APP=flask_app
+$ # export FLASK_ENV=development
+$ flask run --host=0.0.0.0 --port=5000
+```
 
-[[CooGAN]](https://github.com/neuralchen/CooGAN);
+## Docker
 
-[[Knowledge Style Transfer]](https://github.com/AceSix/Knowledge_Transfer);
+### Build and Run Flask App using Docker
 
-[[SimSwap]](https://github.com/neuralchen/SimSwap);
+* Current image is only CPU compatible
+* Update dockerfile, replacing `<app_name>`
+* Add `instance/config` file
+* Build and Run Image
 
-[[ASMA-GAN]](https://github.com/neuralchen/ASMAGAN);
+```bash
+$ docker build -t <app_name> -f DockerFile .
+$ docker run -d --rm -p 5000:5000 <app_name>
 
-[[SNGAN-Projection-pytorch]](https://github.com/neuralchen/SNGAN_Projection)
-
-[[Pretrained_VGG19]](https://github.com/neuralchen/Pretrained_VGG19).
-
-## Acknowledgements
-
-<!--ts-->
-* [Insightface](https://github.com/deepinsight/insightface)
-<!--te-->
+$ # tear down container
+$ docker stop <app_name>
+```
