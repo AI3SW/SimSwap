@@ -18,3 +18,14 @@ LOGGING_CONFIG = {
         'handlers': ['console', 'file']
     }
 }
+
+MODEL_CONFIG = {
+    'args': {
+        'isTrain': 'false',
+        'name': 'people',
+        'Arc_path': './arcface_model/arcface_checkpoint.tar',
+        'checkpoints_dir': './checkpoints'
+    },
+    'crop_size': 224,
+    'insightface_path': './insightface_func/models'
+}
