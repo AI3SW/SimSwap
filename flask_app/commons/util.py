@@ -7,6 +7,15 @@ import torch
 from PIL import Image
 
 
+class FaceNotDetectedError(Exception):
+    def __init__(self, img_type: str) -> None:
+        super().__init__()
+        self.img_type = img_type
+
+    def __str__(self) -> str:
+        return f"Face not detected in {self.img_type} image"
+
+
 def dict_to_args(dict: dict) -> list:
     args = []
     for key, value in dict.items():

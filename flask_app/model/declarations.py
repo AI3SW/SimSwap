@@ -4,8 +4,9 @@ from abc import ABC, abstractmethod
 import cv2
 import numpy as np
 import torch.nn.functional as F
-from flask_app.commons.util import (cv2_to_pil, dict_to_args,
-                                    image_to_base64, pil_to_cv2, to_tensor)
+from flask_app.commons.util import (FaceNotDetectedError, cv2_to_pil,
+                                    dict_to_args, image_to_base64, pil_to_cv2,
+                                    to_tensor)
 from insightface_func.face_detect_crop_single import Face_detect_crop
 from models.models import create_model
 from options.test_options import TestOptions
@@ -63,7 +64,12 @@ class SimSwap(BaseModel):
         # process source image
         src_img = inputs.get('src_img')
         src_img = pil_to_cv2(src_img)
-        src_img_list, _ = self.app.get(src_img, crop_size)
+
+        app_results = self.app.get(src_img, crop_size)
+        if app_results == None:
+            raise FaceNotDetectedError(img_type='source')
+        src_img_list, _ = app_results
+
         src_img = self.transformer_Arcface(cv2_to_pil(src_img_list[0]))
         src_img_id = src_img.view(-1, src_img.shape[0], src_img.shape[1],
                                   src_img.shape[2])
@@ -77,7 +83,11 @@ class SimSwap(BaseModel):
         # process reference image
         ref_img = inputs.get('ref_img')
         ref_img = pil_to_cv2(ref_img)
-        ref_img_list, ref_mat_list = self.app.get(ref_img, crop_size)
+
+        app_results = self.app.get(ref_img, crop_size)
+        if app_results == None:
+            raise FaceNotDetectedError(img_type='reference')
+        ref_img_list, ref_mat_list = app_results
 
         # forward pass
         swap_result_list = []
