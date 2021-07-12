@@ -3,7 +3,7 @@ import time
 
 from flask import Blueprint, render_template, request
 
-from flask_app.commons.util import base64_to_image
+from flask_app.commons.util import base64_to_image, FaceNotDetectedError
 from flask_app.model import model_store
 
 blueprint = Blueprint('blueprint', __name__)
@@ -39,6 +39,9 @@ def predict():
 
         return response
 
+    except FaceNotDetectedError as error:
+        logging.exception(error)
+        return {'error': str(error)}
     except Exception as error:
         logging.exception(error)
         return {'error': 'Error in prediction'}
