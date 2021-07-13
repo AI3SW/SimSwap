@@ -18,16 +18,24 @@ $ conda activate simswap
 
 * Notebook demo can be found [here](notebooks/predict_function.ipynb).
 
+## Face Detection using `insightface` library
+
+* Notebook demo can be found [here](notebooks/face_detection.ipynb).
+
 ## Flask App
 
-A Flask application can be setup that creates a `predict` endpoint that takes in:
+A Flask application can be setup that creates :
 
-* a source image encoded in base64 format
-* a reference image encoded in base64 format
+* a `predict` endpoint for SimSwap model that takes in the following parameters and returns a generated image encoded in base64 format:
 
-and returns a generated image encoded in base64 format.
+    * a source image encoded in base64 format
+    * a reference image encoded in base64 format
 
-For a demo of the `predict` endpoint, refer to [test_flask](notebooks/test_flask.ipynb) notebook.
+* a `detect` endpoint for face detection that takes in the following parameters and returns `is_face_detected`, `bounding_box`, and detection `score`:
+
+    * a image encoded in base64 format
+
+For a demo of the endpoints, refer to [test_flask](notebooks/test_flask.ipynb) notebook.
 
 ### Before Running
 
@@ -43,9 +51,9 @@ For a demo of the `predict` endpoint, refer to [test_flask](notebooks/test_flask
 
 1. Update `MODEL_CONFIG` in [`config.py`](config.py) with path to pre-trained networks:
 
-    * `insightface_path`
     * `Arc_path`
     * `checkpoints_dir`
+    * `insightface.model_dir`
 
 1. Create `instance` directory in project folder
 
