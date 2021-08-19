@@ -3,7 +3,7 @@ import time
 
 from flask import Blueprint, render_template, request
 
-from flask_app.commons.util import base64_to_image, FaceNotDetectedError
+from flask_app.commons.util import FaceNotDetectedError, base64_to_image
 from flask_app.model import model_store
 
 blueprint = Blueprint('blueprint', __name__)
@@ -42,6 +42,33 @@ def predict():
     except FaceNotDetectedError as error:
         logging.exception(error)
         return {'error': str(error)}
+    except Exception as error:
+        logging.exception(error)
+        return {'error': 'Error in prediction'}
+
+
+@blueprint.route('/detect', methods=['POST'])
+def detect():
+    logging.info("POST /detect")
+    req = request.get_json()
+
+    try:
+        start_time = time.time()
+
+        model = model_store.get('face_detection')
+
+        # convert images in base64 string format to PIL image
+        output = model.predict({
+            'img': base64_to_image(req['img'])
+        })
+
+        response = model.format_prediction(output)
+
+        end_time = time.time()
+        logging.info('Total prediction time: %.3fs.' % (end_time - start_time))
+
+        return response
+
     except Exception as error:
         logging.exception(error)
         return {'error': 'Error in prediction'}

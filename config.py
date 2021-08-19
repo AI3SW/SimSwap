@@ -27,5 +27,12 @@ MODEL_CONFIG = {
         'checkpoints_dir': './checkpoints'
     },
     'crop_size': 224,
-    'insightface_path': './insightface_func/models'
+    'insightface': {
+        'model_dir': './insightface_func/models',
+        'model_name': 'antelope',
+        'model_path': 'scrfd_10g_bnkps.onnx',
+        'ctx_id': 0,
+        'detection_threshold': 0.6,
+        'det_size': (640, 640)
+    }
 }
