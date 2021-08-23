@@ -1,6 +1,6 @@
 import logging
 from abc import ABC, abstractmethod
-from os import path
+from os import path, environ
 from typing import List
 
 import cv2
@@ -57,8 +57,11 @@ class SimSwapModel(BaseModel):
         self.predictor.eval()
         self.app = Face_detect_crop(name=config['insightface']['model_name'],
                                     root=config['insightface']['model_dir'])
+        det_thresh = float(environ.get('DETECTION_THRESHOLD',
+                           config['insightface']['detection_threshold']))
+        logging.info(f'det_thresh of {det_thresh} loaded')
         self.app.prepare(ctx_id=config['insightface']['ctx_id'],
-                         det_thresh=config['insightface']['detection_threshold'],
+                         det_thresh=det_thresh,
                          det_size=config['insightface']['det_size'])
 
     def predict(self, inputs: dict) -> Image.Image:

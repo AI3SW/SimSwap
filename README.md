@@ -67,3 +67,27 @@ $ export FLASK_APP=flask_app
 $ # export FLASK_ENV=development
 $ flask run --host=0.0.0.0 --port=5000
 ```
+
+## Docker
+
+* To override detection threshold of insightface model, create a `.env` file with a `DETECTION_THRESHOLD` variable:
+
+```bash
+DETECTION_THRESHOLD=0.2
+
+```
+
+### Build and Run
+
+```bash
+$ docker build -t simswap -f Dockerfile .
+
+$ docker run --gpus all -d --rm -p 5000:5000 -v $(pwd)/instance:/stargan-v2/instance --name simswap simswap
+
+$ # with .env file
+$ docker run --gpus all -d --rm -p 5000:5000 -v $(pwd)/instance:/stargan-v2/instance --env-file .env --name simswap simswap
+
+$ # tear down container
+$ docker stop simswap
+
+```
