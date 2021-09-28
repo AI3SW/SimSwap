@@ -22,10 +22,8 @@ RUN conda env create --file environment.yaml
 
 RUN chmod +x entrypoint.sh
 
-EXPOSE 5000
-
-ENV FLASK_APP=flask_app
+EXPOSE 8000
 
 # https://towardsdatascience.com/conda-pip-and-docker-ftw-d64fe638dc45#77e9
 ENTRYPOINT [ "./entrypoint.sh" ]
-CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
+CMD ["gunicorn", "-w", "1", "-b", "0.0.0.0:8000", "flask_app:create_app()"]

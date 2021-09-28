@@ -20,3 +20,4 @@ dependencies:
     - Flask-SQLAlchemy==2.4.4
     - flask-marshmallow==0.14.0
     - marshmallow-sqlalchemy==0.24.1
+    - gunicorn==20.1.0
