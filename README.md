@@ -10,7 +10,7 @@
 
 ```bash
 $ # create conda environment
-$ conda env create --file environment.yml
+$ conda env create --file environment.yaml
 $ conda activate simswap
 ```
 
@@ -44,7 +44,7 @@ For a demo of the endpoints, refer to [test_flask](notebooks/test_flask.ipynb) n
 1. There are two archive files in the drive: **checkpoints.zip** and **arcface_checkpoint.tar**
 
     - **Copy the arcface_checkpoint.tar into ./arcface_model**
-    - **Unzip checkpoints.zip, place it in the root dir ./**
+    - **Unzip checkpoints.zip, place it in the root dir ./checkpoints**
 
     [[Google Drive]](https://drive.google.com/drive/folders/1jV6_0FIMPC53FZ2HzZNJZGMe55bbu17R?usp=sharing)
     [[Baidu Drive]](https://pan.baidu.com/s/1wFV11RVZMHqd-ky4YpLdcA) Password: ```jd2v```
@@ -66,4 +66,36 @@ For a demo of the endpoints, refer to [test_flask](notebooks/test_flask.ipynb) n
 $ export FLASK_APP=flask_app
 $ # export FLASK_ENV=development
 $ flask run --host=0.0.0.0 --port=5000
+```
+
+### Using gunicorn
+
+```bash
+$ # runs on '127.0.0.1:8000' on default
+$ gunicorn -w 1 'flask_app:create_app()'
+
+```
+
+## Docker
+
+* To override detection threshold of insightface model, create a `.env` file with a `DETECTION_THRESHOLD` variable:
+
+```bash
+DETECTION_THRESHOLD=0.2
+
+```
+
+### Build and Run
+
+```bash
+$ docker build -t simswap -f Dockerfile .
+
+$ docker run --gpus all -d --rm -p 5001:8000 -v $(pwd)/instance:/simswap/instance --name simswap simswap
+
+$ # with .env file
+$ docker run --gpus all -d --rm -p 5001:8000 -v $(pwd)/instance:/simswap/instance --env-file .env --name simswap simswap
+
+$ # tear down container
+$ docker stop simswap
+
 ```

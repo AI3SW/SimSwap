@@ -32,7 +32,7 @@ MODEL_CONFIG = {
         'model_name': 'antelope',
         'model_path': 'scrfd_10g_bnkps.onnx',
         'ctx_id': 0,
-        'detection_threshold': 0.6,
+        'detection_threshold': 0.4,
         'det_size': (640, 640)
     }
 }
